@@ -1,0 +1,6 @@
+{
+  "extends": ["@bouchenoiremarc/eslint-config"],
+  "rules": {
+    "unicorn/import-style": "off"
+  }
+}
