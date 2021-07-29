@@ -8,9 +8,9 @@ import createFile from "write-json-file"
 import yargs from "yargs-parser"
 import { isPlainObject } from "./guards"
 import { PlainObject } from "./types"
-import { appendFileName } from "./utils/append-file-name"
 import { flattenArguments } from "./utils/flatten-arguments"
 import { generateRandomId } from "./utils/generate-random-id"
+import { renameFileInPath } from "./utils/rename-file-in-path"
 import { resolveConfigFile } from "./utils/resolve-config-file"
 
 const CONFIG_ARGUMENT = "project"
@@ -47,10 +47,11 @@ async function tsc(args: PlainObject | string[] = []) {
       const resolvedConfig = await resolveConfigFile(config)
 
       if (resolvedConfig) {
-        const temporaryConfig = appendFileName(
-          resolvedConfig,
-          generateRandomId()
-        )
+        const temporaryConfig = renameFileInPath(resolvedConfig, (file) => {
+          const hiddenFile = file.startsWith(".") ? file : `.${file}`
+
+          return `${hiddenFile}.${generateRandomId()}`
+        })
 
         await createFile(temporaryConfig, {
           extends: resolvedConfig,
