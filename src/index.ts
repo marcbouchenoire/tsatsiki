@@ -4,7 +4,7 @@ import process from "process"
 import execa, { ExecaError } from "execa"
 import onExit from "exit-hook"
 import { sync as rimraf } from "rimraf"
-import createFile from "write-json-file"
+import writeJSON from "write-json-file"
 import yargs from "yargs-parser"
 import { isPlainObject } from "./guards"
 import { PlainObject } from "./types"
@@ -53,7 +53,7 @@ async function tsc(args: PlainObject | string[] = []) {
           return `${hiddenFile}.${generateRandomId()}`
         })
 
-        await createFile(temporaryConfig, {
+        await writeJSON(temporaryConfig, {
           extends: resolvedConfig,
           include: files
         })
