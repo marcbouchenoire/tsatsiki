@@ -12,6 +12,29 @@ function isTemporaryConfig(file: string) {
 }
 
 describe("tsc-mixed", () => {
+  test("should run tsc with included files", async () => {
+    const { config, file, error, clean } = await generateEnvironment()
+
+    expect.assertions(2)
+
+    const { exitCode } = await execa("yarn", [
+      "tsc-mixed",
+      "--project",
+      config,
+      file
+    ])
+
+    expect(exitCode).toBe(0)
+
+    try {
+      await execa("yarn", ["tsc-mixed", "--project", config, error])
+    } catch (error) {
+      expect(error?.exitCode).toBe(0) // eslint-disable-line jest/no-conditional-expect, jest/no-try-expect
+    }
+
+    clean()
+  })
+
   test("should create a valid temporary configuration file", async () => {
     const { directory, config, file, clean } = await generateEnvironment()
 

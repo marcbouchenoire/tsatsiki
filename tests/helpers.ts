@@ -8,13 +8,15 @@ interface Environment {
   clean: () => void
   config: string
   directory: string
+  error: string
   file: string
 }
 
 export async function generateEnvironment(): Promise<Environment> {
   const directory = tempy.directory()
   const config = path.resolve(directory, "tsconfig.json")
-  const file = path.resolve(directory, "index.ts")
+  const file = path.resolve(directory, "file.ts")
+  const error = path.resolve(directory, "error.ts")
 
   await writeJSON(config, {
     compilerOptions: {
@@ -30,7 +32,8 @@ export async function generateEnvironment(): Promise<Environment> {
     },
     exclude: ["node_modules"]
   })
-  await writeFile(file, "export const constant: number = 'constant'")
+  await writeFile(file, "export const file = 0")
+  await writeFile(error, "export const error: number = 'error'")
 
   const clean = () => {
     rimraf(directory)
@@ -40,6 +43,7 @@ export async function generateEnvironment(): Promise<Environment> {
     clean,
     config,
     directory,
+    error,
     file
   }
 }
