@@ -44,7 +44,7 @@
   "devDependencies": {
     "@bouchenoiremarc/eslint-config": "^1.5.2",
     "@types/jest": "^26.0.24",
-    "@types/node": "^16.4.3",
+    "@types/node": "^16.4.10",
     "@types/rimraf": "^3.0.1",
     "@types/yargs-parser": "^20.2.1",
     "chokidar": "^3.5.2",
