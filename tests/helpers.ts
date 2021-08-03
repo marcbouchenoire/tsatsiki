@@ -1,5 +1,6 @@
 import { writeFile } from "fs/promises"
 import path from "path"
+import { FSWatcher } from "chokidar"
 import { sync as rimraf } from "rimraf"
 import tempy from "tempy"
 import writeJSON from "write-json-file"
@@ -33,7 +34,7 @@ export async function generateEnvironment(): Promise<Environment> {
     exclude: ["node_modules"]
   })
   await writeFile(file, "export const file = 0")
-  await writeFile(error, "export const error: number = 'error'")
+  await writeFile(error, "export const error: number = '0'")
 
   const clean = () => {
     rimraf(directory)
@@ -48,6 +49,11 @@ export async function generateEnvironment(): Promise<Environment> {
   }
 }
 
-export function delay(delay: number) {
-  return new Promise((resolve) => setTimeout(resolve, delay))
+export async function on(
+  watcher: FSWatcher,
+  event: "add" | "unlink"
+): Promise<string> {
+  return new Promise((resolve) =>
+    watcher.on(event, (path: string) => resolve(path))
+  )
 }
