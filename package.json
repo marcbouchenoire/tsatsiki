@@ -38,6 +38,7 @@
     "lint:prettier": "prettier --write '**/*.{ts,tsx}' --loglevel silent",
     "lint:tsc": "tsc --project tsconfig.json",
     "prepare": "rimraf dist && yarn build",
+    "release": "yarn login && np",
     "test": "jest"
   },
   "devDependencies": {
@@ -54,6 +55,7 @@
     "lint-staged": "^11.0.1",
     "load-json-file": "^6.2.0",
     "microbundle": "^0.13.3",
+    "np": "^7.5.0",
     "prettier": "^2.3.2",
     "tempy": "^1.0.1",
     "ts-jest": "^27.0.4",
