@@ -1,6 +1,6 @@
 {
   "name": "tsc-mixed",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Run tsc with a configuration and files.",
   "author": "Marc Bouchenoire",
   "license": "MIT",
