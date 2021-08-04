@@ -1003,9 +1003,9 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@bouchenoiremarc/eslint-config@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@bouchenoiremarc/eslint-config/-/eslint-config-1.5.2.tgz#e89737c6341f64fb43f4ce1541bcf24d471bfd7e"
-  integrity sha512-j+BXdW6n4AUte0piUZ8oqu6u5bNrzVHN3/PzR04DA98UNlhkf6M1oU94lQbCUOx58cXFGsTGZuZYxSKC1yBo7Q==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@bouchenoiremarc/eslint-config/-/eslint-config-1.5.3.tgz#04bdc5f42c7f6f26cec36b6074a046ef4864d0ab"
+  integrity sha512-7Y2OAErcK4zubWAKe/gDEUT0S3/Aa94gKAw+MxH8T3ftS9tfgiu9TCcwYxKy4Z8ww6XiTw13GmPKX5rTZVUi4Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.28.2"
     "@typescript-eslint/parser" "^4.28.2"
