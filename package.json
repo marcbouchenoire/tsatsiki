@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "microbundle  --tsconfig tsconfig.build.json --format cjs --target node --sourcemap false",
-    "tsc-mixed": "node -r esbuild-register src/index.ts",
+    "tsc-mixed": "node -r @swc-node/register src/index.ts",
     "clean": "jest --clearCache && rimraf node_modules",
     "lint": "yarn lint:eslint && yarn lint:tsc && yarn lint:prettier",
     "lint:eslint": "eslint '**/*.{ts,tsx}' --fix",
@@ -43,12 +43,12 @@
   },
   "devDependencies": {
     "@bouchenoiremarc/eslint-config": "^1.5.2",
+    "@swc-node/register": "^1.3.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.3",
     "@types/rimraf": "^3.0.1",
     "@types/yargs-parser": "^20.2.1",
     "chokidar": "^3.5.2",
-    "esbuild-register": "^2.6.0",
     "eslint": "^7.31.0",
     "husky": "4.3.8",
     "jest": "^27.0.6",
