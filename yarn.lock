@@ -3621,10 +3621,10 @@ execa@^5.0.0, execa@^5.1.1:
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
 
-exit-hook@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/exit-hook/-/exit-hook-2.2.1.tgz#007b2d92c6428eda2b76e7016a34351586934593"
-  integrity sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==
+exit-hook@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/exit-hook/-/exit-hook-3.0.0.tgz#367d132735a24b96569327806cfbf0eb081af7b5"
+  integrity sha512-ElRvnoj3dvOc5WjnQx0CF66rS0xehV6eZdcmqZX17uOLPy3me43frl8UD73Frkx5Aq5kgziMDECjDJR2X1oBFQ==
 
 exit@^0.1.2:
   version "0.1.2"
