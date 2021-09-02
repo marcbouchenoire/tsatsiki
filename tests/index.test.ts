@@ -1,6 +1,6 @@
 import path from "path"
 import { watch } from "chokidar"
-import execa from "execa"
+import execa, { ExecaError } from "execa"
 import loadJSON from "load-json-file"
 import { PlainObject } from "../src/types"
 import { generateEnvironment, on } from "./helpers"
@@ -25,7 +25,7 @@ describe("tsc-mixed", () => {
     try {
       await execa("yarn", ["tsc-mixed", "--project", config, error])
     } catch (error) {
-      expect(error?.exitCode).toBe(2) // eslint-disable-line jest/no-conditional-expect, jest/no-try-expect
+      expect((error as ExecaError)?.exitCode).toBe(2) // eslint-disable-line jest/no-conditional-expect, jest/no-try-expect
     }
 
     clean()
