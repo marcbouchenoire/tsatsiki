@@ -69,7 +69,7 @@
     "execa": "^5.1.1",
     "exit-hook": "^2.2.1",
     "rimraf": "^3.0.2",
-    "write-json-file": "^4.3.0",
+    "write-json-file": "^5.0.0",
     "yargs-parser": "^20.2.9"
   }
 }
