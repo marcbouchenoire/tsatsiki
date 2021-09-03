@@ -20,7 +20,7 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "eslint --fix",
-      "yarn tsc-mixed --project tsconfig.json",
+      "yarn tsc-mixed --project tsconfig.json declarations.d.ts",
       "prettier --write"
     ]
   },
