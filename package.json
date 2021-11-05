@@ -50,7 +50,7 @@
     "@types/rimraf": "^3.0.1",
     "@types/yargs-parser": "^20.2.1",
     "chokidar": "^3.5.2",
-    "eslint": "^7.31.0",
+    "eslint": "^8.1.0",
     "husky": "4.3.8",
     "jest": "^27.0.6",
     "jest-extended": "^1.1.0",
