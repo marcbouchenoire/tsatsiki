@@ -3,7 +3,4 @@
     "@bouchenoiremarc/eslint-config",
     "@bouchenoiremarc/eslint-config/jest"
   ],
-  "rules": {
-    "unicorn/import-style": "off"
-  }
 }
