@@ -1,4 +1,5 @@
 import { resolveConfigFile } from "../../src/utils/resolve-config-file"
+import "jest-extended"
 
 describe("resolveConfigFile", () => {
   test("should return a path to a configuration file if there's one", async () => {
