@@ -1,14 +1,14 @@
 {
-  "name": "tsc-mixed",
+  "name": "tsatsiki",
   "version": "1.0.1",
   "description": "Run tsc with a configuration and files.",
   "author": "Marc Bouchenoire",
   "license": "MIT",
-  "repository": "https://github.com/bouchenoiremarc/tsc-mixed",
+  "repository": "https://github.com/bouchenoiremarc/tsatsiki",
   "keywords": [
     "typescript",
     "cli",
-    "mixed",
+    "files",
     "staged"
   ],
   "files": [
@@ -16,12 +16,12 @@
     "dist"
   ],
   "source": "./src/index.ts",
-  "bin": "./dist/tsc-mixed.js",
+  "bin": "./dist/tsatsiki.js",
   "prettier": "@bouchenoiremarc/prettier-config",
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "eslint --fix",
-      "yarn tsc-mixed --project tsconfig.json declarations.d.ts",
+      "yarn tsatsiki --project tsconfig.json declarations.d.ts",
       "prettier --write"
     ]
   },
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "microbundle  --tsconfig tsconfig.build.json --format cjs --target node --sourcemap false",
-    "tsc-mixed": "node -r @swc-node/register src/index.ts",
+    "tsatsiki": "node -r @swc-node/register src/index.ts",
     "clean": "jest --clearCache && rimraf dist node_modules",
     "lint": "yarn lint:eslint && yarn lint:tsc && yarn lint:prettier",
     "lint:eslint": "eslint '**/*.{ts,tsx}' --fix",

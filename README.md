@@ -1,12 +1,12 @@
-# tsc-mixed
+# tsatsiki
 
-📠 ️Run `tsc` with a configuration and files.
+🥒 Run `tsc` with a configuration and files.
 
-[![build](https://github.com/bouchenoiremarc/tsc-mixed/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bouchenoiremarc/tsc-mixed/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/tsc-mixed?color=%230cf)](https://www.npmjs.com/package/tsc-mixed) [![license](https://img.shields.io/github/license/bouchenoiremarc/tsc-mixed?color=%23e4b)](https://github.com/bouchenoiremarc/tsc-mixed/blob/main/LICENSE)
+[![build](https://github.com/bouchenoiremarc/tsatsiki/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bouchenoiremarc/tsatsiki/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/tsatsiki?color=%230cf)](https://www.npmjs.com/package/tsatsiki) [![license](https://img.shields.io/github/license/bouchenoiremarc/tsatsiki?color=%23e4b)](https://github.com/bouchenoiremarc/tsatsiki/blob/main/LICENSE)
 
 ## Introduction
 
-`tsc-mixed` builds upon TypeScript's own `tsc` to circumvent its `TS5042` error.
+`tsatsiki` builds upon TypeScript's own `tsc` to circumvent its `TS5042` error.
 
 ```sh
 tsc --project tsconfig.json index.ts
@@ -19,13 +19,13 @@ tsc --project tsconfig.json index.ts
 #### Yarn
 
 ```sh
-yarn add -D tsc-mixed
+yarn add -D tsatsiki
 ```
 
 #### npm
 
 ```sh
-npm install --save-dev tsc-mixed
+npm install --save-dev tsatsiki
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ npm install --save-dev tsc-mixed
 Use it as a drop-in `tsc` replacement.
 
 ```sh
-tsc-mixed --project tsconfig.json index.ts
+tsatsiki --project tsconfig.json index.ts
 ```
 
 #### `lint-staged`
@@ -42,6 +42,6 @@ Use it with [`lint-staged`](https://github.com/okonet/lint-staged) to only type 
 
 ```json
 {
-  "**/*.{ts,tsx}": ["tsc-mixed --project tsconfig.json"]
+  "**/*.{ts,tsx}": ["tsatsiki --project tsconfig.json"]
 }
 ```

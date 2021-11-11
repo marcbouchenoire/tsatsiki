@@ -7,14 +7,14 @@ import { generateEnvironment, on } from "./helpers"
 
 const temporaryConfigRegex = /.tsconfig.\w+.json/
 
-describe("tsc-mixed", () => {
+describe("tsatsiki", () => {
   test("should run tsc with included files", async () => {
     const { config, file, error, clean } = await generateEnvironment()
 
     expect.assertions(2)
 
     const { exitCode } = await execa("yarn", [
-      "tsc-mixed",
+      "tsatsiki",
       "--project",
       config,
       file
@@ -23,7 +23,7 @@ describe("tsc-mixed", () => {
     expect(exitCode).toBe(0)
 
     try {
-      await execa("yarn", ["tsc-mixed", "--project", config, error])
+      await execa("yarn", ["tsatsiki", "--project", config, error])
     } catch (error) {
       expect((error as ExecaError)?.exitCode).toBe(2) // eslint-disable-line jest/no-conditional-expect
     }
@@ -39,7 +39,7 @@ describe("tsc-mixed", () => {
       ignoreInitial: true
     })
     const subprocess = execa("yarn", [
-      "tsc-mixed",
+      "tsatsiki",
       "--watch",
       "--project",
       config,
@@ -63,7 +63,7 @@ describe("tsc-mixed", () => {
 
     const watcher = watch(directory, { ignoreInitial: true })
     const subprocess = execa("yarn", [
-      "tsc-mixed",
+      "tsatsiki",
       "--watch",
       "--project",
       config,
@@ -85,7 +85,7 @@ describe("tsc-mixed", () => {
 
     const watcher = watch(directory, { ignoreInitial: true })
     const subprocess = execa("yarn", [
-      "tsc-mixed",
+      "tsatsiki",
       "--watch",
       "--project",
       config,
