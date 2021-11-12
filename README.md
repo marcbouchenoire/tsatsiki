@@ -8,7 +8,7 @@
 
 `tsatsiki` builds upon TypeScript's own `tsc` to circumvent its `TS5042` error.
 
-```sh
+```bash
 tsc --project tsconfig.json index.ts
 
 # error TS5042: Option "project" cannot be mixed with source files on a command line.
@@ -18,13 +18,13 @@ tsc --project tsconfig.json index.ts
 
 #### Yarn
 
-```sh
+```bash
 yarn add -D tsatsiki
 ```
 
 #### npm
 
-```sh
+```bash
 npm install --save-dev tsatsiki
 ```
 
@@ -32,7 +32,7 @@ npm install --save-dev tsatsiki
 
 Use it as a drop-in `tsc` replacement.
 
-```sh
+```bash
 tsatsiki --project tsconfig.json index.ts
 ```
 
