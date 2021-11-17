@@ -40,7 +40,7 @@
     "lint:tsc": "tsc --project tsconfig.json",
     "prepare": "rimraf dist && yarn build",
     "release": "yarn login && np",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@bouchenoiremarc/eslint-config": "^2.0.0",
