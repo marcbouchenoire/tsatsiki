@@ -72,6 +72,6 @@
     "exit-hook": "^2.2.1",
     "rimraf": "^3.0.2",
     "write-json-file": "^4.3.0",
-    "yargs-parser": "^20.2.9"
+    "yargs-parser": "^21.0.0"
   }
 }
