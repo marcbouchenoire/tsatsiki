@@ -68,7 +68,7 @@
     "typescript": ">=1.8.0"
   },
   "dependencies": {
-    "execa": "^5.1.1",
+    "execa": "^6.0.0",
     "exit-hook": "^2.2.1",
     "rimraf": "^3.0.2",
     "write-json-file": "^4.3.0",
