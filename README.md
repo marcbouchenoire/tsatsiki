@@ -1,6 +1,6 @@
 # tsatsiki
 
-🥒 Run `tsc` with a configuration and files.
+🥒 Run `tsc` with both a configuration and specific files.
 
 [![build](https://github.com/bouchenoiremarc/tsatsiki/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bouchenoiremarc/tsatsiki/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/tsatsiki?color=%230cf)](https://www.npmjs.com/package/tsatsiki) [![license](https://img.shields.io/github/license/bouchenoiremarc/tsatsiki?color=%23e4b)](https://github.com/bouchenoiremarc/tsatsiki/blob/main/LICENSE)
 
