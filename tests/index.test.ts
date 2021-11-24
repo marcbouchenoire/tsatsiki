@@ -1,17 +1,29 @@
 import path from "path"
-import { watch } from "chokidar"
-import execa, { ExecaError } from "execa"
-import loadJSON from "load-json-file"
-import { PlainObject } from "../src/types"
-import { generateEnvironment, on } from "./helpers"
+import { FSWatcher, watch } from "chokidar"
+import { ExecaError, execa } from "execa"
+import { loadJsonFile } from "load-json-file"
+import * as assert from "uvu/assert"
+import { describe, generateEnvironment } from "./helpers"
 
 const temporaryConfigRegex = /.tsconfig.\w+.json/
 
-describe("tsatsiki", () => {
-  test("should run tsc with included files", async () => {
-    const { config, file, error, clean } = await generateEnvironment()
+interface TemporaryConfig {
+  extends?: string
+  include?: string[]
+}
 
-    expect.assertions(2)
+async function watchFor(
+  watcher: FSWatcher,
+  event: "add" | "unlink"
+): Promise<string> {
+  return new Promise((resolve) =>
+    watcher.on(event, (path: string) => resolve(path))
+  )
+}
+
+describe("tsatsiki", (it) => {
+  it("should run tsc with included files", async () => {
+    const { config, file, error, clean } = await generateEnvironment()
 
     const { exitCode } = await execa("yarn", [
       "tsatsiki",
@@ -20,18 +32,19 @@ describe("tsatsiki", () => {
       file
     ])
 
-    expect(exitCode).toBe(0)
+    assert.equal(exitCode, 0)
 
     try {
       await execa("yarn", ["tsatsiki", "--project", config, error])
+      assert.unreachable()
     } catch (error) {
-      expect((error as ExecaError)?.exitCode).toBe(2) // eslint-disable-line jest/no-conditional-expect
+      assert.equal((error as ExecaError)?.exitCode, 2)
     }
 
     clean()
   })
 
-  test("should create a valid temporary configuration file", async () => {
+  it("should create a valid temporary configuration file", async () => {
     const { directory, config, file, clean } = await generateEnvironment()
 
     const watcher = watch(directory, {
@@ -46,19 +59,44 @@ describe("tsatsiki", () => {
       file
     ])
 
-    const temporaryConfig: PlainObject = await loadJSON(
-      await on(watcher, "add")
+    const temporaryConfig: TemporaryConfig = await loadJsonFile(
+      await watchFor(watcher, "add")
     )
 
-    expect(temporaryConfig?.extends).toEqual(path.resolve(directory, config))
-    expect(temporaryConfig?.include).toContain(path.resolve(directory, file))
+    assert.is(temporaryConfig?.extends, path.resolve(directory, config))
+    assert.equal(
+      temporaryConfig?.include?.includes(path.resolve(directory, file)),
+      true
+    )
 
     await watcher.close()
     subprocess.cancel()
     clean()
   })
 
-  test("should remove the temporary configuration file when the process is canceled", async () => {
+  it("should remove the temporary configuration file when the process is cancelled", async () => {
+    const { directory, config, file, clean } = await generateEnvironment()
+
+    const watcher = watch(directory, { ignoreInitial: true })
+    const subprocess = execa("node", [
+      "dist/tsatsiki.js",
+      "--watch",
+      "--project",
+      config,
+      file
+    ])
+
+    assert.match(await watchFor(watcher, "add"), temporaryConfigRegex)
+
+    subprocess.cancel()
+
+    assert.match(await watchFor(watcher, "unlink"), temporaryConfigRegex)
+
+    await watcher.close()
+    clean()
+  })
+
+  it("should remove the temporary configuration file when the process is killed", async () => {
     const { directory, config, file, clean } = await generateEnvironment()
 
     const watcher = watch(directory, { ignoreInitial: true })
@@ -70,33 +108,11 @@ describe("tsatsiki", () => {
       file
     ])
 
-    expect(await on(watcher, "add")).toMatch(temporaryConfigRegex)
-
-    subprocess.cancel()
-
-    expect(await on(watcher, "unlink")).toMatch(temporaryConfigRegex)
-
-    await watcher.close()
-    clean()
-  })
-
-  test("should remove the temporary configuration file when the process is killed", async () => {
-    const { directory, config, file, clean } = await generateEnvironment()
-
-    const watcher = watch(directory, { ignoreInitial: true })
-    const subprocess = execa("yarn", [
-      "tsatsiki",
-      "--watch",
-      "--project",
-      config,
-      file
-    ])
-
-    expect(await on(watcher, "add")).toMatch(temporaryConfigRegex)
+    assert.match(await watchFor(watcher, "add"), temporaryConfigRegex)
 
     subprocess.kill()
 
-    expect(await on(watcher, "unlink")).toMatch(temporaryConfigRegex)
+    assert.match(await watchFor(watcher, "unlink"), temporaryConfigRegex)
 
     await watcher.close()
     clean()

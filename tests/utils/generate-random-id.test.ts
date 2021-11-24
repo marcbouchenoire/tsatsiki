@@ -1,10 +1,12 @@
+import * as assert from "uvu/assert"
 import { generateRandomId } from "../../src/utils/generate-random-id"
+import { describe } from "../helpers"
 
-describe("generateRandomId", () => {
-  test("should generate different values", () => {
+describe("generateRandomId", (it) => {
+  it("should generate different values", () => {
     const a = generateRandomId()
     const b = generateRandomId()
 
-    expect(a).not.toEqual(b)
+    assert.not.equal(a, b)
   })
 })

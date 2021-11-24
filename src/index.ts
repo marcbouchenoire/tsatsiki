@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
+import fs from "fs"
 import process from "process"
-import execa, { ExecaError } from "execa"
+import { ExecaError, execa } from "execa"
 import onExit from "exit-hook"
-import { sync as rimraf } from "rimraf"
-import writeJSON from "write-json-file"
+import { writeJsonFile } from "write-json-file"
 import yargs from "yargs-parser"
 import { isPlainObject } from "./guards"
 import { PlainObject } from "./types"
@@ -53,13 +51,13 @@ async function tsc(args: PlainObject | string[] = []) {
           return `${hiddenFile}.${generateRandomId()}`
         })
 
-        await writeJSON(temporaryConfig, {
+        await writeJsonFile(temporaryConfig, {
           extends: resolvedConfig,
           include: files
         })
 
         onExit(() => {
-          rimraf(temporaryConfig)
+          fs.unlinkSync(temporaryConfig)
         })
 
         await tsc({ [CONFIG_ARGUMENT]: temporaryConfig, ...args })

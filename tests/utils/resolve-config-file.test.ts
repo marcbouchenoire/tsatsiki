@@ -1,13 +1,14 @@
+import * as assert from "uvu/assert"
 import { resolveConfigFile } from "../../src/utils/resolve-config-file"
-import "jest-extended"
+import { describe } from "../helpers"
 
-describe("resolveConfigFile", () => {
-  test("should return a path to a configuration file if there's one", async () => {
-    expect(await resolveConfigFile("tsconfig.json")).toBeString()
-    expect(await resolveConfigFile(".")).toBeString()
+describe("resolveConfigFile", (it) => {
+  it("should return a path to a configuration file if there's one", async () => {
+    assert.type(await resolveConfigFile("tsconfig.json"), "string")
+    assert.type(await resolveConfigFile("."), "string")
   })
 
-  test("should return undefined if no configuration file is found", async () => {
-    expect(await resolveConfigFile("jsconfig.json")).toBeUndefined()
+  it("should return undefined if no configuration file is found", async () => {
+    assert.type(await resolveConfigFile("jsconfig.json"), "undefined")
   })
 })

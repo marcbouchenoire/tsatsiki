@@ -1,9 +1,11 @@
+import fs from "fs"
 import { writeFile } from "fs/promises"
 import path from "path"
-import { FSWatcher } from "chokidar"
-import { sync as rimraf } from "rimraf"
 import tempy from "tempy"
-import writeJSON from "write-json-file"
+import { Test, suite } from "uvu"
+import { writeJsonFile } from "write-json-file"
+
+type Describer = (test: Test) => Promise<void> | void
 
 interface Environment {
   clean: () => void
@@ -13,13 +15,24 @@ interface Environment {
   file: string
 }
 
+export function describe(name: string, hook: Describer): void {
+  const test = suite(name)
+  hook(test)
+
+  test.run()
+}
+
+export function wait(delay: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, delay))
+}
+
 export async function generateEnvironment(): Promise<Environment> {
   const directory = tempy.directory()
   const config = path.resolve(directory, "tsconfig.json")
   const file = path.resolve(directory, "file.ts")
   const error = path.resolve(directory, "error.ts")
 
-  await writeJSON(config, {
+  await writeJsonFile(config, {
     compilerOptions: {
       baseUrl: ".",
       esModuleInterop: true,
@@ -37,7 +50,7 @@ export async function generateEnvironment(): Promise<Environment> {
   await writeFile(error, "export const error: number = '0'")
 
   const clean = () => {
-    rimraf(directory)
+    fs.rmSync(directory, { recursive: true, force: true })
   }
 
   return {
@@ -47,13 +60,4 @@ export async function generateEnvironment(): Promise<Environment> {
     error,
     file
   }
-}
-
-export async function on(
-  watcher: FSWatcher,
-  event: "add" | "unlink"
-): Promise<string> {
-  return new Promise((resolve) =>
-    watcher.on(event, (path: string) => resolve(path))
-  )
 }

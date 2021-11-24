@@ -1,16 +1,11 @@
-import { basename, dirname } from "path"
-import { findConfigFile, sys } from "typescript"
-import { exists } from "./exists"
+import { basename, resolve } from "path"
+import { findUp, pathExists } from "find-up"
 import { isFile } from "./is-file"
 
 export async function resolveConfigFile(path: string) {
-  if (!(await exists(path))) return undefined
+  if (!(await pathExists(path))) return undefined
 
-  const isConfigFile = await isFile(path)
-
-  return findConfigFile(
-    dirname(path),
-    sys.fileExists,
-    isConfigFile ? basename(path) : undefined
-  )
+  return (await isFile(path))
+    ? resolve(path)
+    : await findUp("tsconfig.json", { type: "file", cwd: basename(path) })
 }

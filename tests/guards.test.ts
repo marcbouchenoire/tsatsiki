@@ -1,3 +1,4 @@
+import * as assert from "uvu/assert"
 import { isPlainObject } from "../src/guards"
 import {
   array,
@@ -9,19 +10,20 @@ import {
   set,
   string
 } from "./constants"
+import { describe } from "./helpers"
 
-describe("isPlainObject", () => {
-  test("should return true for plain objects", () => {
-    expect(isPlainObject(object)).toBeTruthy()
+describe("isPlainObject", (it) => {
+  it("should return true for plain objects", () => {
+    assert.equal(isPlainObject(object), true)
   })
 
-  test("should return false for any other types", () => {
-    expect(isPlainObject(array)).toBeFalsy()
-    expect(isPlainObject(boolean)).toBeFalsy()
-    expect(isPlainObject(fun)).toBeFalsy()
-    expect(isPlainObject(map)).toBeFalsy()
-    expect(isPlainObject(number)).toBeFalsy()
-    expect(isPlainObject(set)).toBeFalsy()
-    expect(isPlainObject(string)).toBeFalsy()
+  it("should return false for any other types", () => {
+    assert.equal(isPlainObject(array), false)
+    assert.equal(isPlainObject(boolean), false)
+    assert.equal(isPlainObject(fun), false)
+    assert.equal(isPlainObject(map), false)
+    assert.equal(isPlainObject(number), false)
+    assert.equal(isPlainObject(set), false)
+    assert.equal(isPlainObject(string), false)
   })
 })

@@ -1,5 +1,6 @@
 {
   "name": "tsatsiki",
+  "type": "module",
   "version": "1.0.1",
   "description": "Run tsc with a configuration and files.",
   "author": "Marc Bouchenoire",
@@ -15,14 +16,24 @@
     "src",
     "dist"
   ],
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
   "source": "./src/index.ts",
   "bin": "./dist/tsatsiki.js",
   "prettier": "@bouchenoiremarc/prettier-config",
   "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "yarn prettier"
+    ],
     "**/*.{ts,tsx}": [
       "eslint --fix",
-      "yarn tsatsiki --project tsconfig.json declarations.d.ts",
-      "prettier --write"
+      "yarn tsatsiki --project tsconfig.json",
+      "yarn prettier"
+    ],
+    "**/*.{json,md,yml}": [
+      "yarn prettier"
     ]
   },
   "husky": {
@@ -31,47 +42,45 @@
     }
   },
   "scripts": {
-    "build": "microbundle  --tsconfig tsconfig.build.json --format cjs --target node --sourcemap false",
-    "tsatsiki": "node -r @swc-node/register src/index.ts",
-    "clean": "jest --clearCache && rimraf dist node_modules",
+    "build": "rollup --config && chmod a+x dist/tsatsiki.js",
+    "tsatsiki": "node --loader tsm src/index.ts",
+    "prettier": "prettier --write --loglevel silent --ignore-path .eslintignore",
     "lint": "yarn lint:eslint && yarn lint:tsc && yarn lint:prettier",
-    "lint:eslint": "eslint '**/*.{ts,tsx}' --fix",
-    "lint:prettier": "prettier --write '**/*.{ts,tsx}' --loglevel silent",
+    "lint:eslint": "eslint '**/*.{js,ts,tsx}' --fix",
+    "lint:prettier": "yarn prettier '**/*.{js,ts,tsx,json,md,yml}'",
     "lint:tsc": "tsc --project tsconfig.json",
-    "prepare": "rimraf dist && yarn build",
+    "prepublishOnly": "yarn build",
     "release": "yarn login && np",
-    "test": "jest --coverage"
+    "test": "uvu --require tsm tests"
   },
   "devDependencies": {
-    "@bouchenoiremarc/eslint-config": "^2.0.0",
+    "@bouchenoiremarc/eslint-config": "^2.2.1",
     "@bouchenoiremarc/prettier-config": "^1.1.0",
-    "@swc-node/jest": "^1.3.5",
-    "@swc-node/register": "^1.3.3",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.4.3",
-    "@types/rimraf": "^3.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@types/node": "^16.11.10",
     "@types/yargs-parser": "^20.2.1",
     "chokidar": "^3.5.2",
-    "eslint": "^8.2.0",
+    "eslint": "^8.3.0",
     "husky": "4.3.8",
-    "jest": "^27.0.6",
-    "jest-extended": "^1.1.0",
-    "lint-staged": "^11.0.1",
-    "load-json-file": "^6.2.0",
-    "microbundle": "^0.13.3",
-    "np": "^7.5.0",
-    "prettier": "^2.3.2",
-    "tempy": "^1.0.1",
-    "typescript": "^4.3.5"
+    "lint-staged": "^12.1.2",
+    "load-json-file": "^7.0.1",
+    "np": "^7.6.0",
+    "prettier": "^2.4.1",
+    "rollup": "^2.60.1",
+    "rollup-plugin-esbuild": "^4.7.2",
+    "tempy": "^2.0.0",
+    "tsm": "^2.1.4",
+    "typescript": "^4.5.2",
+    "uvu": "^0.5.2"
   },
   "peerDependencies": {
     "typescript": ">=1.8.0"
   },
   "dependencies": {
-    "execa": "^5.1.1",
-    "exit-hook": "^2.2.1",
-    "rimraf": "^3.0.2",
-    "write-json-file": "^4.3.0",
-    "yargs-parser": "^20.2.9"
+    "execa": "^6.0.0",
+    "exit-hook": "^3.0.0",
+    "find-up": "^6.2.0",
+    "write-json-file": "^5.0.0",
+    "yargs-parser": "^21.0.0"
   }
 }

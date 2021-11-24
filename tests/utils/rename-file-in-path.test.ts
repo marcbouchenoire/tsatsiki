@@ -1,12 +1,15 @@
 import path from "path"
+import * as assert from "uvu/assert"
 import { renameFileInPath } from "../../src/utils/rename-file-in-path"
+import { describe } from "../helpers"
 
-describe("renameFileInPath", () => {
-  test("should rename a file in a resolved path", () => {
+describe("renameFileInPath", (it) => {
+  it("should rename a file in a resolved path", () => {
     const initial = path.resolve("package.json")
     const renamed = path.resolve("packagepackage.json")
 
-    expect(renameFileInPath(initial, (file) => `${file}${file}`)).toEqual(
+    assert.equal(
+      renameFileInPath(initial, (file) => `${file}${file}`),
       renamed
     )
   })
