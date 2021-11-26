@@ -22,7 +22,31 @@ async function watchFor(
 }
 
 describe("tsatsiki", (it) => {
-  it("should run tsc with included files", async () => {
+  it("should run tsc as is", async () => {
+    const { config, file, clean } = await generateEnvironment()
+
+    const { exitCode } = await execa("yarn", ["tsatsiki", file])
+
+    assert.equal(exitCode, 0)
+
+    try {
+      await execa("yarn", ["tsatsiki", "--project", config])
+      assert.unreachable()
+    } catch (error) {
+      assert.equal((error as ExecaError)?.exitCode, 2)
+    }
+
+    try {
+      await execa("yarn", ["tsatsiki", "--project", "tsconfig.erroneous.json"])
+      assert.unreachable()
+    } catch (error) {
+      assert.equal((error as ExecaError)?.exitCode, 1)
+    }
+
+    clean()
+  })
+
+  it("should run tsc with a configuration and included files", async () => {
     const { config, file, error, clean } = await generateEnvironment()
 
     const { exitCode } = await execa("yarn", [
@@ -75,7 +99,9 @@ describe("tsatsiki", (it) => {
   })
 
   it("should remove the temporary configuration file when the process is cancelled", async () => {
-    const { directory, config, file, clean } = await generateEnvironment()
+    const { directory, config, file, clean } = await generateEnvironment(
+      ".tsconfig.json"
+    )
 
     const watcher = watch(directory, { ignoreInitial: true })
     const subprocess = execa("node", [
@@ -97,7 +123,9 @@ describe("tsatsiki", (it) => {
   })
 
   it("should remove the temporary configuration file when the process is killed", async () => {
-    const { directory, config, file, clean } = await generateEnvironment()
+    const { directory, config, file, clean } = await generateEnvironment(
+      ".tsconfig.json"
+    )
 
     const watcher = watch(directory, { ignoreInitial: true })
     const subprocess = execa("yarn", [

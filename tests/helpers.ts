@@ -26,9 +26,11 @@ export function wait(delay: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, delay))
 }
 
-export async function generateEnvironment(): Promise<Environment> {
+export async function generateEnvironment(
+  configuration = "tsconfig.json"
+): Promise<Environment> {
   const directory = tempy.directory()
-  const config = path.resolve(directory, "tsconfig.json")
+  const config = path.resolve(directory, configuration)
   const file = path.resolve(directory, "file.ts")
   const error = path.resolve(directory, "error.ts")
 
