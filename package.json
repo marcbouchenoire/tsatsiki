@@ -1,7 +1,7 @@
 {
   "name": "tsatsiki",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Run tsc with both a configuration and specific files.",
   "author": "Marc Bouchenoire",
   "license": "MIT",
