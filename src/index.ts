@@ -1,14 +1,15 @@
 import fs from "fs"
+import path from "path"
 import process from "process"
 import { ExecaError, execa } from "execa"
 import onExit from "exit-hook"
+import { pathExistsSync } from "find-up"
 import { writeJsonFile } from "write-json-file"
 import yargs from "yargs-parser"
 import { isPlainObject } from "./guards"
 import { PlainObject } from "./types"
 import { flattenArguments } from "./utils/flatten-arguments"
 import { generateRandomId } from "./utils/generate-random-id"
-import { renameFileInPath } from "./utils/rename-file-in-path"
 import { resolveConfigFile } from "./utils/resolve-config-file"
 
 const CONFIG_ARGUMENT = "project"
@@ -45,11 +46,27 @@ async function tsc(args: PlainObject | string[] = []) {
       const resolvedConfig = await resolveConfigFile(config)
 
       if (resolvedConfig) {
-        const temporaryConfig = renameFileInPath(resolvedConfig, (file) => {
-          const hiddenFile = file.startsWith(".") ? file : `.${file}`
+        const id = generateRandomId()
+        const resolvedConfigExtension = path.extname(resolvedConfig)
+        const resolvedConfigFile = path.basename(
+          resolvedConfig,
+          resolvedConfigExtension
+        )
 
-          return `${hiddenFile}.${generateRandomId()}`
-        })
+        const hiddenConfigFile = resolvedConfigFile.startsWith(".")
+          ? resolvedConfigFile
+          : `.${resolvedConfigFile}`
+        const temporaryConfigFile = `${hiddenConfigFile}.${id}`
+
+        const [temporaryConfig, temporaryBuildInfo] = [
+          resolvedConfigExtension,
+          ".tsbuildinfo"
+        ].map((extension) =>
+          path.resolve(
+            path.dirname(resolvedConfig),
+            `${temporaryConfigFile}${extension}`
+          )
+        )
 
         await writeJsonFile(temporaryConfig, {
           extends: resolvedConfig,
@@ -57,7 +74,11 @@ async function tsc(args: PlainObject | string[] = []) {
         })
 
         onExit(() => {
-          fs.unlinkSync(temporaryConfig)
+          for (const temporaryFile of [temporaryConfig, temporaryBuildInfo]) {
+            if (pathExistsSync(temporaryFile)) {
+              fs.unlinkSync(temporaryFile)
+            }
+          }
         })
 
         await tsc({ [CONFIG_ARGUMENT]: temporaryConfig, ...args })

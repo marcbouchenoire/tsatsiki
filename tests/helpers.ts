@@ -15,6 +15,10 @@ interface Environment {
   file: string
 }
 
+interface Options {
+  incremental?: boolean
+}
+
 export function describe(name: string, hook: Describer): void {
   const test = suite(name)
   hook(test)
@@ -27,7 +31,8 @@ export function wait(delay: number): Promise<void> {
 }
 
 export async function generateEnvironment(
-  configuration = "tsconfig.json"
+  configuration = "tsconfig.json",
+  { incremental }: Options = {}
 ): Promise<Environment> {
   const directory = tempy.directory()
   const config = path.resolve(directory, configuration)
@@ -44,7 +49,8 @@ export async function generateEnvironment(
       noEmit: true,
       skipLibCheck: true,
       strict: true,
-      target: "esnext"
+      target: "esnext",
+      incremental
     },
     exclude: ["node_modules"]
   })
