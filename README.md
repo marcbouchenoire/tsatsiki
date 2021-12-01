@@ -1,14 +1,14 @@
-# <img src="https://raw.githubusercontent.com/bouchenoiremarc/tsatsiki/main/.github/logo.svg" height="50" alt="Tsatsiki" />
+# <img src="https://raw.githubusercontent.com/marcbouchenoire/tsatsiki/main/.github/logo.svg" height="50" alt="Tsatsiki" />
 
 🥒 Run `tsc` with both a configuration and specific files.
 
-[![build](https://img.shields.io/github/workflow/status/bouchenoiremarc/tsatsiki/CI?color=%236c2)](https://github.com/bouchenoiremarc/tsatsiki/actions/workflows/ci.yml)
+[![build](https://img.shields.io/github/workflow/status/marcbouchenoire/tsatsiki/CI?color=%236c2)](https://github.com/marcbouchenoire/tsatsiki/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/tsatsiki?color=%236c2)](https://www.npmjs.com/package/tsatsiki)
-[![coverage](https://img.shields.io/codecov/c/github/bouchenoiremarc/tsatsiki?color=%236c2)](https://codecov.io/gh/bouchenoiremarc/tsatsiki)
-[![license](https://img.shields.io/github/license/bouchenoiremarc/tsatsiki?color=%236c2)](https://github.com/bouchenoiremarc/tsatsiki/blob/main/LICENSE)
+[![coverage](https://img.shields.io/codecov/c/github/marcbouchenoire/tsatsiki?color=%236c2)](https://codecov.io/gh/marcbouchenoire/tsatsiki)
+[![license](https://img.shields.io/github/license/marcbouchenoire/tsatsiki?color=%236c2)](https://github.com/marcbouchenoire/tsatsiki/blob/main/LICENSE)
 
 - 📚 **Simple**: A drop-in `tsc` replacement
-- 🧪 **Reliable**: Fully tested with [100% code coverage](https://codecov.io/gh/bouchenoiremarc/tsatsiki)
+- 🧪 **Reliable**: Fully tested with [100% code coverage](https://codecov.io/gh/marcbouchenoire/tsatsiki)
 - 📦 **Typed**: Written in [TypeScript](https://www.typescriptlang.org/)
 
 ## Introduction
