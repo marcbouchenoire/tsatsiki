@@ -23,7 +23,7 @@
   "bin": "./dist/tsatsiki.js",
   "prettier": "@marcbouchenoire/prettier-config",
   "lint-staged": {
-    "**/*.js": [
+    "**/*.mjs": [
       "eslint --fix",
       "yarn prettier"
     ],
@@ -46,8 +46,8 @@
     "tsatsiki": "node --loader tsm src/index.ts",
     "prettier": "prettier --write --loglevel silent --ignore-path .eslintignore",
     "lint": "yarn lint:eslint && yarn lint:tsc && yarn lint:prettier",
-    "lint:eslint": "eslint '**/*.{js,ts,tsx}' --fix",
-    "lint:prettier": "yarn prettier '**/*.{js,ts,tsx,json,md,yml}'",
+    "lint:eslint": "eslint '**/*.{mjs,ts,tsx}' --fix",
+    "lint:prettier": "yarn prettier '**/*.{mjs,ts,tsx,json,md,yml}'",
     "lint:tsc": "tsc --project tsconfig.json",
     "prepublishOnly": "yarn build",
     "release": "yarn login && np",
