@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/marcbouchenoire/tsatsiki/main/.github/logo.svg" height="50" alt="Tsatsiki" />
+# <img src="https://raw.githubusercontent.com/marcbouchenoire/tsatsiki/main/.github/logo.svg" width="205" height="50" alt="Tsatsiki" />
 
 🥒 Run `tsc` with both a configuration and specific files.
 
