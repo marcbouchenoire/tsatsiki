@@ -43,9 +43,9 @@ Use it as a drop-in `tsc` replacement.
 tsatsiki --project tsconfig.json index.ts
 ```
 
-#### `lint-staged`
+#### Staged files
 
-Use it with [`lint-staged`](https://github.com/okonet/lint-staged) to only type check staged files.
+Use it with [`lint-staged`](https://github.com/okonet/lint-staged) or [`nano-staged`](https://github.com/usmanyunusov/nano-staged) to only type check staged files.
 
 ```json
 {
