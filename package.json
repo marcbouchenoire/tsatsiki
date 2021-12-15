@@ -22,7 +22,7 @@
   "source": "./src/index.ts",
   "bin": "./dist/tsatsiki.js",
   "prettier": "@marcbouchenoire/prettier-config",
-  "lint-staged": {
+  "nano-staged": {
     "**/*.mjs": [
       "eslint --fix",
       "yarn prettier"
@@ -38,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "nano-staged"
     }
   },
   "scripts": {
@@ -63,8 +63,8 @@
     "chokidar": "^3.5.2",
     "eslint": "^8.3.0",
     "husky": "4.3.8",
-    "lint-staged": "^12.1.2",
     "load-json-file": "^7.0.1",
+    "nano-staged": "^0.5.0",
     "np": "^7.6.0",
     "nyc": "^15.1.0",
     "prettier": "^2.4.1",
