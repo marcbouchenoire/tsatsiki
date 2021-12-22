@@ -19,18 +19,27 @@ interface Options {
   incremental?: boolean
 }
 
-export function describe(name: string, hook: Describer): void {
+/**
+ * Run multiple tests as a named suite.
+ *
+ * @param name - The name of the test suite.
+ * @param callback - The test suite as a callback.
+ */
+export function describe(name: string, callback: Describer): void {
   const test = suite(name)
-  hook(test)
+  callback(test)
 
   test.run()
 }
 
-export function wait(delay: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, delay))
-}
-
-export async function generateEnvironment(
+/**
+ * Generate an isolated test environment containing TypeScript files.
+ *
+ * @param [configuration] - The TypeScript configuration file name.
+ * @param [options] - An optional set of options.
+ * @param [options.incremental] - Whether to run TypeScript incrementally.
+ */
+export async function generateTestEnvironment(
   configuration = "tsconfig.json",
   { incremental }: Options = {}
 ): Promise<Environment> {

@@ -15,6 +15,11 @@ import { resolveConfigFile } from "./utils/resolve-config-file"
 const CONFIG_ARGUMENT = "project"
 const CONFIG_ARGUMENT_ALIAS = "p"
 
+/**
+ * Run TypeScript's CLI.
+ *
+ * @param [args] - CLI arguments as an object or flattened string.
+ */
 async function tsc(args: PlainObject | string[] = []) {
   try {
     await execa("tsc", isPlainObject(args) ? flattenArguments(args) : args, {

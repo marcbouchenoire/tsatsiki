@@ -1,3 +1,8 @@
+/**
+ * Flatten an object of CLI arguments into a string.
+ *
+ * @param args - An object of CLI arguments.
+ */
 export function flattenArguments(
   args: Record<string, boolean | number | string>
 ) {

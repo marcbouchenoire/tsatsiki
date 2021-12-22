@@ -1,5 +1,8 @@
 {
-  "extends": ["@marcbouchenoire/eslint-config"],
+  "extends": [
+    "@marcbouchenoire/eslint-config",
+    "@marcbouchenoire/eslint-config/jsdoc"
+  ],
   "rules": {
     "unicorn/no-process-exit": "off"
   }
