@@ -4,7 +4,7 @@ import { FSWatcher, watch } from "chokidar"
 import { ExecaError, execa } from "execa"
 import { loadJsonFile } from "load-json-file"
 import * as assert from "uvu/assert"
-import { describe, generateEnvironment } from "./helpers"
+import { describe, generateTestEnvironment } from "./helpers"
 
 const temporaryConfigRegex = /\.tsconfig\.\w+\.json/
 const temporaryBuildInfoRegex = /\.tsconfig\.\w+\.tsbuildinfo/
@@ -25,7 +25,7 @@ async function watchFor(
 
 describe("tsatsiki", (it) => {
   it("should run tsc as is", async () => {
-    const { config, file, clean } = await generateEnvironment()
+    const { config, file, clean } = await generateTestEnvironment()
 
     const { exitCode } = await execa("yarn", ["tsatsiki", file])
 
@@ -49,7 +49,7 @@ describe("tsatsiki", (it) => {
   })
 
   it("should run tsc with a configuration and included files", async () => {
-    const { config, file, error, clean } = await generateEnvironment()
+    const { config, file, error, clean } = await generateTestEnvironment()
 
     const { exitCode } = await execa("yarn", [
       "tsatsiki",
@@ -71,7 +71,7 @@ describe("tsatsiki", (it) => {
   })
 
   it("should remove temporary files afterwards", async () => {
-    const { directory, config, file, clean } = await generateEnvironment(
+    const { directory, config, file, clean } = await generateTestEnvironment(
       ".tsconfig.json",
       {
         incremental: true
@@ -95,7 +95,7 @@ describe("tsatsiki", (it) => {
   })
 
   it("should create a valid temporary configuration file", async () => {
-    const { directory, config, file, clean } = await generateEnvironment()
+    const { directory, config, file, clean } = await generateTestEnvironment()
 
     const watcher = watch(directory, {
       awaitWriteFinish: true,
@@ -125,7 +125,7 @@ describe("tsatsiki", (it) => {
   })
 
   it("should remove temporary files when the process is cancelled", async () => {
-    const { directory, config, file, clean } = await generateEnvironment()
+    const { directory, config, file, clean } = await generateTestEnvironment()
 
     const watcher = watch(directory, { ignoreInitial: true })
     const subprocess = execa("node", [
@@ -147,7 +147,7 @@ describe("tsatsiki", (it) => {
   })
 
   it("should remove temporary files when the process is killed", async () => {
-    const { directory, config, file, clean } = await generateEnvironment()
+    const { directory, config, file, clean } = await generateTestEnvironment()
 
     const watcher = watch(directory, { ignoreInitial: true })
     const subprocess = execa("yarn", [
