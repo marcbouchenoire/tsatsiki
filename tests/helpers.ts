@@ -7,23 +7,45 @@ import { writeJsonFile } from "write-json-file"
 
 type Describer = (test: Test) => Promise<void> | void
 
-interface Environment {
+interface TestEnvironment {
+  /**
+   * Clean up the temporary environment.
+   */
   clean: () => void
+
+  /**
+   * The path to the environment's TypeScript configuration file.
+   */
   config: string
+
+  /**
+   * The path to the environment's directory.
+   */
   directory: string
+
+  /**
+   * The path to a TypeScript file containing a type error.
+   */
   error: string
+
+  /**
+   * The path to a correct TypeScript file.
+   */
   file: string
 }
 
 interface Options {
+  /**
+   * Whether to run TypeScript incrementally.
+   */
   incremental?: boolean
 }
 
 /**
  * Run multiple tests as a named suite.
  *
- * @param name - The name of the test suite.
- * @param callback - The test suite as a callback.
+ * @param name - The name of the suite.
+ * @param callback - The suite as a function.
  */
 export function describe(name: string, callback: Describer): void {
   const test = suite(name)
@@ -36,13 +58,13 @@ export function describe(name: string, callback: Describer): void {
  * Generate an isolated test environment containing TypeScript files.
  *
  * @param [configuration] - The TypeScript configuration file name.
- * @param [options] - An optional set of options.
+ * @param [options] - An optional set of settings.
  * @param [options.incremental] - Whether to run TypeScript incrementally.
  */
 export async function generateTestEnvironment(
   configuration = "tsconfig.json",
   { incremental }: Options = {}
-): Promise<Environment> {
+): Promise<TestEnvironment> {
   const directory = tempy.directory()
   const config = path.resolve(directory, configuration)
   const file = path.resolve(directory, "file.ts")
