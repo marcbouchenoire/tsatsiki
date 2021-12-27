@@ -1,9 +1,9 @@
 import { PlainObject, PlainObjectValue } from "./types"
 
 /**
- * Return whether the value is a plain object.
+ * Whether the value is a plain object.
  *
- * @param value - The value to be checked.
+ * @param value - The value to check.
  */
 export function isPlainObject<
   T extends PlainObjectValue,

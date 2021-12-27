@@ -10,10 +10,16 @@ const temporaryConfigRegex = /\.tsconfig\.\w+\.json/
 const temporaryBuildInfoRegex = /\.tsconfig\.\w+\.tsbuildinfo/
 
 interface TemporaryConfig {
-  extends?: string
-  include?: string[]
+  extends?: string // eslint-disable-line jsdoc/require-jsdoc
+  include?: string[] // eslint-disable-line jsdoc/require-jsdoc
 }
 
+/**
+ * Asynchronously watch for Chokidar events.
+ *
+ * @param watcher - The Chokidar watcher to watch from.
+ * @param event - The event type to watch for.
+ */
 async function watchFor(
   watcher: FSWatcher,
   event: "add" | "unlink"
