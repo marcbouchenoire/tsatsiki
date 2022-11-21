@@ -57,7 +57,7 @@
   "devDependencies": {
     "@marcbouchenoire/eslint-config": "^2.4.2",
     "@marcbouchenoire/prettier-config": "^1.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/node": "^18.6.4",
     "@types/yargs-parser": "^20.2.1",
     "chokidar": "^3.5.2",
