@@ -1,7 +1,7 @@
 import fs from "fs"
 import { writeFile } from "fs/promises"
 import path from "path"
-import tempy from "tempy"
+import { temporaryDirectory } from "tempy"
 import { Test, suite } from "uvu"
 import { writeJsonFile } from "write-json-file"
 
@@ -65,7 +65,7 @@ export async function generateTestEnvironment(
   configuration = "tsconfig.json",
   { incremental }: Options = {}
 ): Promise<TestEnvironment> {
-  const directory = tempy.directory()
+  const directory = temporaryDirectory()
   const config = path.resolve(directory, configuration)
   const file = path.resolve(directory, "file.ts")
   const error = path.resolve(directory, "error.ts")
