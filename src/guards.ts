@@ -1,4 +1,4 @@
-import { PlainObject, PlainObjectValue } from "./types"
+import type { PlainObject, PlainObjectValue } from "./types"
 
 /**
  * Whether the value is a plain object.
