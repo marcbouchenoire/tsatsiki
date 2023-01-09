@@ -25,15 +25,15 @@
   "nano-staged": {
     "**/*.mjs": [
       "eslint --fix",
-      "yarn prettier"
+      "pnpm prettier"
     ],
     "**/*.{ts,tsx}": [
       "eslint --fix",
-      "yarn tsatsiki --project tsconfig.json",
-      "yarn prettier"
+      "pnpm tsatsiki --project tsconfig.json",
+      "pnpm prettier"
     ],
     "**/*.{json,md,yml}": [
-      "yarn prettier"
+      "pnpm prettier"
     ]
   },
   "husky": {
@@ -45,14 +45,14 @@
     "build": "rollup --config && chmod a+x dist/tsatsiki.js",
     "tsatsiki": "node --loader tsm src/index.ts",
     "prettier": "prettier --write --loglevel silent --ignore-path .eslintignore",
-    "lint": "yarn lint:eslint && yarn lint:tsc && yarn lint:prettier",
+    "lint": "pnpm lint:eslint && pnpm lint:tsc && pnpm lint:prettier",
     "lint:eslint": "eslint '**/*.{mjs,ts,tsx}' --fix",
-    "lint:prettier": "yarn prettier '**/*.{mjs,ts,tsx,json,md,yml}'",
+    "lint:prettier": "pnpm prettier '**/*.{mjs,ts,tsx,json,md,yml}'",
     "lint:tsc": "tsc --project tsconfig.json",
-    "prepublishOnly": "yarn build",
-    "release": "yarn login && np",
+    "prepublishOnly": "pnpm build",
+    "release": "pnpm login && np",
     "test": "uvu --require tsm tests",
-    "test:coverage": "nyc --temp-dir=.nyc.log --include=src yarn test && nyc report --temp-dir=.nyc.log --reporter=lcov"
+    "test:coverage": "nyc --temp-dir=.nyc.log --include=src pnpm test && nyc report --temp-dir=.nyc.log --reporter=lcov"
   },
   "dependencies": {
     "execa": "^6.1.0",
@@ -68,6 +68,7 @@
     "@types/node": "^18.11.18",
     "@types/yargs-parser": "^21.0.0",
     "chokidar": "^3.5.3",
+    "esbuild": "^0.16.16",
     "eslint": "^8.31.0",
     "husky": "4.3.8",
     "load-json-file": "^7.0.1",
