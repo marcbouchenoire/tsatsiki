@@ -42,19 +42,19 @@ describe("tsatsiki", (it) => {
   it("should run tsc as is", async () => {
     const { config, file, clean } = await generateTestEnvironment()
 
-    const { exitCode } = await execa("yarn", ["tsatsiki", file])
+    const { exitCode } = await execa("pnpm", ["tsatsiki", file])
 
     assert.equal(exitCode, 0)
 
     try {
-      await execa("yarn", ["tsatsiki", "--project", config])
+      await execa("pnpm", ["tsatsiki", "--project", config])
       assert.unreachable()
     } catch (error) {
       assert.equal((error as ExecaError)?.exitCode, 2)
     }
 
     try {
-      await execa("yarn", ["tsatsiki", "--project", "tsconfig.erroneous.json"])
+      await execa("pnpm", ["tsatsiki", "--project", "tsconfig.erroneous.json"])
       assert.unreachable()
     } catch (error) {
       assert.equal((error as ExecaError)?.exitCode, 1)
@@ -66,7 +66,7 @@ describe("tsatsiki", (it) => {
   it("should run tsc with a configuration and included files", async () => {
     const { config, file, error, clean } = await generateTestEnvironment()
 
-    const { exitCode } = await execa("yarn", [
+    const { exitCode } = await execa("pnpm", [
       "tsatsiki",
       "--project",
       config,
@@ -76,7 +76,7 @@ describe("tsatsiki", (it) => {
     assert.equal(exitCode, 0)
 
     try {
-      await execa("yarn", ["tsatsiki", "--project", config, error])
+      await execa("pnpm", ["tsatsiki", "--project", config, error])
       assert.unreachable()
     } catch (error) {
       assert.equal((error as ExecaError)?.exitCode, 2)
@@ -93,7 +93,7 @@ describe("tsatsiki", (it) => {
       }
     )
 
-    await execa("yarn", ["tsatsiki", "--project", config, file])
+    await execa("pnpm", ["tsatsiki", "--project", config, file])
 
     const files = await fs.readdir(directory)
 
@@ -116,7 +116,7 @@ describe("tsatsiki", (it) => {
       awaitWriteFinish: true,
       ignoreInitial: true
     })
-    const subprocess = execa("yarn", [
+    const subprocess = execa("pnpm", [
       "tsatsiki",
       "--watch",
       "--project",
@@ -165,7 +165,7 @@ describe("tsatsiki", (it) => {
     const { directory, config, file, clean } = await generateTestEnvironment()
 
     const watcher = watch(directory, { ignoreInitial: true })
-    const subprocess = execa("yarn", [
+    const subprocess = execa("pnpm", [
       "tsatsiki",
       "--watch",
       "--project",
