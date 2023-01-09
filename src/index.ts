@@ -35,6 +35,7 @@ async function tsc(args: PlainObject | string[] = []) {
   const argv = process.argv.slice(2)
   const {
     _: files,
+    "--": positional, // eslint-disable-line @typescript-eslint/no-unused-vars
     [CONFIG_ARGUMENT]: config,
     ...args
   } = yargs(argv, {
