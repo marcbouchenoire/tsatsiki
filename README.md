@@ -2,7 +2,7 @@
 
 🥒 Run `tsc` with both a configuration and specific files.
 
-[![build](https://img.shields.io/github/workflow/status/marcbouchenoire/tsatsiki/CI?color=%236c2)](https://github.com/marcbouchenoire/tsatsiki/actions/workflows/ci.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/marcbouchenoire/tsatsiki/.github/workflows/ci.yml?color=%236c2)](https://github.com/marcbouchenoire/tsatsiki/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/tsatsiki?color=%236c2)](https://www.npmjs.com/package/tsatsiki)
 [![coverage](https://img.shields.io/codecov/c/github/marcbouchenoire/tsatsiki?color=%236c2)](https://codecov.io/gh/marcbouchenoire/tsatsiki)
 [![license](https://img.shields.io/github/license/marcbouchenoire/tsatsiki?color=%236c2)](https://github.com/marcbouchenoire/tsatsiki/blob/main/LICENSE)
