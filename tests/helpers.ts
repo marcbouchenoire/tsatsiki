@@ -2,7 +2,8 @@ import fs from "fs"
 import { writeFile } from "fs/promises"
 import path from "path"
 import { temporaryDirectory } from "tempy"
-import { Test, suite } from "uvu"
+import type { Test } from "uvu"
+import { suite } from "uvu"
 import { writeJsonFile } from "write-json-file"
 
 type Describer = (test: Test) => Promise<void> | void

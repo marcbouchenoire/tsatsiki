@@ -1,7 +1,9 @@
 import fs from "fs/promises"
 import path from "path"
-import { FSWatcher, watch } from "chokidar"
-import { ExecaError, execa } from "execa"
+import type { FSWatcher } from "chokidar"
+import { watch } from "chokidar"
+import type { ExecaError } from "execa"
+import { execa } from "execa"
 import { loadJsonFile } from "load-json-file"
 import * as assert from "uvu/assert"
 import { describe, generateTestEnvironment } from "./helpers"
@@ -10,8 +12,15 @@ const temporaryConfigRegex = /\.tsconfig\.\w+\.json/
 const temporaryBuildInfoRegex = /\.tsconfig\.\w+\.tsbuildinfo/
 
 interface TemporaryConfig {
-  extends?: string // eslint-disable-line jsdoc/require-jsdoc
-  include?: string[] // eslint-disable-line jsdoc/require-jsdoc
+  /**
+   * A base configuration file to inherit from.
+   */
+  extends?: string
+
+  /**
+   * An array of files to include.
+   */
+  include?: string[]
 }
 
 /**
