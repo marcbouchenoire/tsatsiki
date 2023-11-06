@@ -23,14 +23,6 @@ tsc --project tsconfig.json index.ts
 
 ## Installation
 
-#### Yarn
-
-```bash
-yarn add -D tsatsiki
-```
-
-#### npm
-
 ```bash
 npm install --save-dev tsatsiki
 ```
