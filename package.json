@@ -16,9 +16,6 @@
     "src",
     "dist"
   ],
-  "engines": {
-    "node": "^14.13.1 || >=16.0.0"
-  },
   "source": "./src/index.ts",
   "bin": "./dist/tsatsiki.js",
   "prettier": "@marcbouchenoire/prettier-config",
