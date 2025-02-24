@@ -19,25 +19,6 @@
   "source": "./src/index.ts",
   "bin": "./dist/tsatsiki.js",
   "prettier": "@marcbouchenoire/prettier-config",
-  "nano-staged": {
-    "**/*.mjs": [
-      "eslint --fix",
-      "pnpm prettier"
-    ],
-    "**/*.{ts,tsx}": [
-      "eslint --fix",
-      "pnpm tsatsiki --project tsconfig.json",
-      "pnpm prettier"
-    ],
-    "**/*.{json,md,yml}": [
-      "pnpm prettier"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "nano-staged"
-    }
-  },
   "scripts": {
     "build": "rollup --config && chmod a+x dist/tsatsiki.js",
     "tsatsiki": "node --loader tsm src/index.ts",
@@ -70,9 +51,7 @@
     "chokidar": "^3.5.3",
     "esbuild": "^0.16.16",
     "eslint": "^8.31.0",
-    "husky": "4.3.8",
     "load-json-file": "^7.0.1",
-    "nano-staged": "^0.8.0",
     "nyc": "^15.1.0",
     "prettier": "^2.8.2",
     "rollup": "^3.9.1",
